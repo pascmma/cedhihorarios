@@ -2,10 +2,12 @@ from flask_cors import CORS
 from app import create_app
 from app.extensions import db
 from sqlalchemy import text
-import os
+from flask_jwt_extended import JWTManager
 
 app = create_app()
 CORS(app,origins="*")
+app.config["JWT_SECRET_KEY"] = 'cedhiclave'
+jwt = JWTManager(app)
 # Verificar la conexión a la base de datos
 with app.app_context():
     try:

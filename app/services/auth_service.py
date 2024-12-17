@@ -27,7 +27,7 @@ def login_user(email,password):
         print("EL usuario es: ",user)
         if not user or not user.check_password(password):
             return {"error":"Credenciales invalidas"},401
-        access_token = create_access_token(indentity={"user_id":user.user_id,"email":user.email},expires_delta=timedelta(hours=10))
+        access_token = create_access_token(identity={"user_id":user.user_id,"email":user.email},expires_delta=timedelta(hours=10))
 
         return {"menssage":"Inicio de sesion exitoso","user_id":user.user_id,"token":access_token},200
     except Exception as e:
