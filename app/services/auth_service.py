@@ -1,5 +1,9 @@
 from app.models import Usuario
 from app.extensions import db
+from flask_jwt_extended import create_access_token
+from datetime import timedelta
+
+
 
 def register_user(email,password,categoria):
     try:

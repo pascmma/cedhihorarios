@@ -1,7 +1,8 @@
 from app.models import Aula
 from app.extensions import db
 
-def get_aulas():
+def get_all_aulas():
+    print("OBTENER TODAS LAS AULAS")
     return Aula.query.all()
 
 def create_aula(data):
