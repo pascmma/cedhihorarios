@@ -14,7 +14,7 @@ def add_aula():
     new_aula = create_aula(data)
     response = {
         "message":"Curso agregado exitosamente",
-        "aula":new_aula
+        "aula":new_aula.to_dict()
     }
     return jsonify(response),201
 @aulas_blueprint.route('/updateAula/<int:aula_id>', methods=['PUT'])

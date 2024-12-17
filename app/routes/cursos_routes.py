@@ -14,7 +14,7 @@ def get_curso(curso_id):
     curso = get_curso_by_id(curso_id)
     if not curso:
         return jsonify({"error":"Curso no encontrado."}), 404
-    return jsonify(curso.__dict__)
+    return jsonify(curso.to_dict())
 
 @cursos_blueprint.route('/addCurso',methods=['POST'])
 def add_curso():
