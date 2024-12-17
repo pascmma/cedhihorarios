@@ -5,6 +5,7 @@ profesor_blueprint = Blueprint('profesor',__name__)
 
 @profesor_blueprint.route('/getProfesores',methods=['GET'])
 def get_profesores():
+    print("INICIO DE GET PROFESORES")
     profesores = get_all_profesores()
     return jsonify([profesor.to_dict()for profesor in profesores])
 

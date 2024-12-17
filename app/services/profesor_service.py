@@ -9,13 +9,17 @@ def get_profesor_by_id(profesor_id):
 
 def create_profesor(data):
     new_profesor = Profesor(
-        nombre = data.get('nombre'),
-        genero=data.get('genero'),
+        nombres = data.get('nombres'),
         email=data.get('email'),
         edad=data.get('edad'),
-        celular=data.get('celular'),
+        contacto=data.get('contacto'),
         ciudad=data.get('ciudad'),
-        estado=data.get('estado'),
+        status=data.get('status'),
+        especialidad=data.get('especialidad'),
+        genero=data.get('genero'),
+        jornada=data.get('jornada'),
+        horasSemanales=data.get('horasSemanales'),
+        prioridad=data.get('prioridad'),
         disponibilidad=data.get('disponibilidad')
     )
     db.session.add(new_profesor)
@@ -41,4 +45,4 @@ def delete_profesor(profesor_id):
         return False
     db.session.delete(profesor)
     db.session.commit()
-    return True
+    return True 
