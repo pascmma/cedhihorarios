@@ -1,9 +1,11 @@
+from flask_cors import CORS
 from app import create_app
 from app.extensions import db
 from sqlalchemy import text
+import os
 
 app = create_app()
-
+CORS(app,origins="*")
 # Verificar la conexión a la base de datos
 with app.app_context():
     try:
@@ -21,16 +23,8 @@ with app.app_context():
         print(f"Error al crear las tablas: {e}")
 
 
-@app.route('/')
-def home():
-    with  app.app_context():
-        inspector = db.inspect(db.engine)
-        tables = inspector.get_table_names()
-        print(f"tablas: {tables}")
-
-
-    return "Hello, world!"
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    
+    app.run(host="0.0.0.0", port=5001,debug=True)

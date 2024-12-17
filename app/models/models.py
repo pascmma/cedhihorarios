@@ -4,6 +4,21 @@ from flask_login import UserMixin
 from flask_bcrypt import Bcrypt
 
 bcrypt = Bcrypt()
+    
+
+class Usuario(db.Model):
+    __tablename__ = 'usuarios'
+
+    user_id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String, nullable= False)
+    password_hash = db.Column(db.String, nullable=False)
+    categoria = db.Column(db.String,nullable=False)
+
+    def set_password(self,password):
+        self.password_hash = bcrypt.generate_password_hash(password).decode('utf-8')
+
+    def check_password(self,password):
+        return bcrypt.check_password_hash(self.password_hash,password)
 
 class Profesor(db.Model):
     __tablename__ = 'profesores'
@@ -43,21 +58,6 @@ class Profesor(db.Model):
     def __repr__(self) -> str:
         return f"<Profesor {self.nombre}>"
     
-    
-
-class Usuario(db.Model):
-    __tablename__ = 'usuarios'
-
-    user_id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String, nullable= False)
-    password_hash = db.Column(db.String, nullable=False)
-    categoria = db.Column(db.String,nullable=False)
-
-    def set_password(self,password):
-        self.password_hash = bcrypt.generate_password_hash(password).decode('utf-8')
-
-    def check_password(self,password):
-        return bcrypt.check_password_hash(self.password_hash,password)
 
 
 # curso es la Unidad didactica

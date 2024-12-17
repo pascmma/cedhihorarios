@@ -8,7 +8,6 @@ from app.routes.cursos_routes import cursos_blueprint
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
-
     db.init_app(app)
     app.register_blueprint(auth_blueprint, url_prefix='/auth')  # Agregar prefijo opcional
     app.register_blueprint(profesor_blueprint, url_prefix='/profesor')
