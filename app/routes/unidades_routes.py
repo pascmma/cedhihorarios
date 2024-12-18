@@ -17,7 +17,7 @@ def get_unidad(unidad_id):
     unidad = get_unidad_service(unidad_id)
     if not unidad:
         return jsonify({"error":"No se encontro la unidad didactica"})
-    return jsonify(unidad.__dict__)
+    return jsonify(unidad.to_dict())
 
 
 @unidad_blueprint.route('/addUnidad',methods=['POST'])
