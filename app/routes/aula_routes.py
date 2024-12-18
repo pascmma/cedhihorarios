@@ -20,6 +20,8 @@ def add_aula():
         "aula":new_aula.to_dict()
     }
     return jsonify(response),201
+
+
 @aulas_blueprint.route('/updateAula/<int:aula_id>', methods=['PUT'])
 def update_aula_data(aula_id):
     data = request.json
@@ -28,7 +30,7 @@ def update_aula_data(aula_id):
         return jsonify({"error":"Aula no encontrada"}),404
     response = {
         "message":"Curso agregado exitosamente",
-        "aula": updated_aula
+        "aula": updated_aula.to_dict()
     }
     return jsonify(response),201
 

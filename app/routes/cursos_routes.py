@@ -35,6 +35,10 @@ def update_curso_data(curso_id):
     updated_curso = update_curso(curso_id,data)
     if not updated_curso:
         return jsonify({"error":"Curso no encontrado"}),404
+    response = {
+        "message":"Curso agregado exitosamente",
+        "aula": updated_curso.to_dict()
+    }
     return jsonify(updated_curso.to_dict())
     
 @cursos_blueprint.route('/deleteCurso/<int:curso_id>',methods=['DELETE'])
