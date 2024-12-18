@@ -1,12 +1,15 @@
 from flask import Blueprint,request,jsonify
-from app.services.aulas_service import (get_all_aulas,create_aula,update_aula)
+from app.services.aulas_service import (get_all_aulas,create_aula,update_aula,delete_aula_service)
 
 aulas_blueprint = Blueprint('aulas',__name__)
 
 @aulas_blueprint.route('/getAulas',methods=['GET'])
 def get_aulas():
     aulas = get_all_aulas()
-    return jsonify([aula.to_dict() for aula in aulas])
+    response = {
+        "aulas":[aula.to_dict() for aula in aulas]
+    }
+    return jsonify(response),200
 
 @aulas_blueprint.route('/addAula',methods=['POST'])
 def add_aula():
@@ -28,3 +31,11 @@ def update_aula_data(aula_id):
         "aula": updated_aula
     }
     return jsonify(response),201
+
+
+@aulas_blueprint.route('/deleteAula/<int:aula_id>', methods=['DELETE'])
+def delete_aula(aula_id):
+    deleted_aula = delete_aula_service(aula_id)
+    if not deleted_aula:
+        return jsonify({"error":"Aula no encontrada."})
+    return jsonify({"message":"Aula eliminada correctamente"})

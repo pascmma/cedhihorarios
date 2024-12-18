@@ -7,7 +7,10 @@ cursos_blueprint = Blueprint('cursos',__name__)
 def get_cursos():
     print("Inicio de get cursos")
     cursos = get_all_cursos()
-    return jsonify([curso.to_dict() for curso in cursos])
+    response = {
+        "cursos":[curso.to_dict() for curso in cursos]
+    }
+    return jsonify(response),200
 
 @cursos_blueprint.route('/getCurso/<int:curso_id>',methods=['GET'])
 def get_curso(curso_id):
@@ -40,6 +43,8 @@ def delete_curso_data(curso_id):
     if not deleted:
         return jsonify({"error":"Curso no encontrado"}),404
     return jsonify({"message":"Curso eliminado correctamente"})
+
+
 @cursos_blueprint.route('/enableCurso/<int:curso_id>',methods=['PATCH'])
 def enable_curso(curso_id):
     try:
@@ -48,4 +53,4 @@ def enable_curso(curso_id):
             return jsonify({"error":"Curso no encontrado"}),404
         return jsonify({"message":"Curso habilitado como Unidad Didactica"})
     except Exception as e:
-        return jsonify({"error":str(e)}),500
+        return jsonify({"error":str(e)}),500 

@@ -27,3 +27,11 @@ def update_aula(aula_id,data):
     db.session.commit()
     return aula
     
+def delete_aula_service(aula_id):
+    aula = Aula.query.get(aula_id)
+    if not aula:
+        return False
+    db.session.delete(aula)
+    db.session.commit()
+    return True
+    

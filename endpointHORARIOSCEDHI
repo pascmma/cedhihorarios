@@ -1,0 +1,105 @@
+Profesores:
+POST
+  - Agregar profesor: http://127.0.0.1:5000/profesor/addProfesor
+   - body:{
+    "nombres": "juanito alimana ",
+    "email": "juan@example.com",
+    "edad": 35,
+    "contacto": 123456789,
+    "ciudad": "Arequipa",
+    "status": "Activo",
+    "especialidad":["Gestión de Proyectos",
+        "Derecho Empresarial",
+        "Economía Empresarial"],
+    "genero": "Hombre",
+    "jornada":"parcial",
+    "horasSemanales":24,
+    "prioridad":1,
+    "disponibilidad": [
+        {
+          "dia": "lunes",
+          "horaInicio": "08:00",
+          "horaFin": "09:00"
+        },
+        {
+          "dia": "lunes",
+          "horaInicio": "12:00",
+          "horaFin": "14:00"
+        },
+        {
+          "dia": "jueves",
+          "horaInicio": "12:00",
+          "horaFin": "14:00"
+        }
+      ]
+}
+
+  
+GET
+ - Obtener profesor:http://127.0.0.1:5000/profesor/getProfesor/1 
+ - Obtener profesores: http://127.0.0.1:5000/profesor/getProfesores
+PUT
+  - Actualizar profesor: http://127.0.0.1:5000/profesor/updateProfesor/1
+DELETE
+  - Eliminar profesor: http://127.0.0.1:5000/profesor/deleteProfesor/1
+  
+Cursos:
+POST
+  - Agregar curso: http://127.0.0.1:5000/cursos/addCurso
+    -body:{
+    	"nombre":"ingles",
+	    "carrera":"gastronomia",
+	    "plan_estudios":"normal",
+	    "modalidad":"presencial",
+	    "semestre":5,
+	    "creditos":"4",
+	    "tipo_curso":"practico"
+	}
+GET
+ - Obtener curso: http://127.0.0.1:5000/cursos/getCurso/1
+ - Obtener cursos: http://127.0.0.1:5000/cursos/getCursos
+PUT
+  - Actualizar curso: http://127.0.0.1:5000/cursos/updateCurso/1
+   - body: los campos que necesites
+PATCH
+  - habilitar curso como UNIDAD DIDACTICA: http://127.0.0.1:5000/cursos/enableCurso/6
+DELETE
+  - Eliminar curso: http://127.0.0.1:5000/cursos/deleteCurso/6
+
+Aulas:
+
+POST
+  - Agregar aula: http://127.0.0.1:5000/aulas/addAula
+    -body:{
+         "tipo_aula":"normal",
+         "nombre":"aula 1",
+         "local":"princial",
+         "formato_aula":"teorico",
+         "capacidad":"50"
+    }
+  
+GET
+ - Obtener aula: http://127.0.0.1:5000/aulas/getAulas
+
+PUT
+  - Actualizar aula: http://127.0.0.1:5000/aulas/updateAula/1
+
+
+Usuarios:
+POST:
+- Registrar: http://127.0.0.1:5000/auth/login
+ -body: {
+    "email":"admin@gmail.com",
+    "password":"1234",
+    "categoria":"director"
+	}
+- Login: http://127.0.0.1:5000/auth/login
+  -body: {
+    "email":"admin@gmail.com",
+    "password":"1234",
+	}
+GET:
+- Obtener todos los usuarios: http://127.0.0.1:5000/auth/getUsers
+  -body: no tiene body
+  
+  
