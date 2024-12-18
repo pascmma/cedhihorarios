@@ -29,7 +29,8 @@ def login_user(email,password):
             return {"error":"Credenciales invalidas"},401
         access_token = create_access_token(identity={"user_id":user.user_id,"email":user.email},expires_delta=timedelta(hours=10))
 
-        return {"menssage":"Inicio de sesion exitoso","user_id":user.user_id,"token":access_token},200
+        #return {"menssage":"Inicio de sesion exitoso","user_id":user.user_id,"token":access_token},200
+        return {"menssage":"Inicio de sesion exitoso", "token":access_token,'user': {"user_id":user.user_id, "categoria": user.categoria, "email": user.email}},200
     except Exception as e:
         return {"error": f"Error interno del servidor: {str(e)}"}, 500
 
