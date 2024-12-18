@@ -65,7 +65,6 @@ class Curso(db.Model):
     curso_id = db.Column(db.Integer, primary_key=True) # id del curso 
     nombre = db.Column(db.String, nullable= False) # nombre del curso 
     plan_estudios = db.Column(db.Integer, nullable=False) # plan de estudios al que pertenece
-    modalidad = db.Column(db.String, nullable=False)
     semestre = db.Column(db.Integer, nullable=False)
     carrera  = db.Column(db.String, nullable=False)
     creditos = db.Column(db.Integer, nullable=False)
@@ -77,7 +76,6 @@ class Curso(db.Model):
             "curso_id":self.curso_id,
             "nombre":self.nombre,
             "plan_estudios":self.plan_estudios,
-            "modalidad":self.modalidad,
             "semestre":self.semestre,
             "carrera":self.carrera,
             "creditos":self.creditos,

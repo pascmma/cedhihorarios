@@ -13,7 +13,6 @@ def create_curso(data):
         carrera = data.get('carrera'),
         plan_estudios = data.get('plan_estudios'),
         semestre = data.get('semestre'),
-        modalidad = data.get('modalidad'),
         creditos = data.get('creditos'),
         tipo_curso = data.get('tipo_curso'),
         estado = False
