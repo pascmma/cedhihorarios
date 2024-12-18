@@ -35,7 +35,8 @@ def login_user(email,password):
         return {"error": f"Error interno del servidor: {str(e)}"}, 500
 
 
-    
+def get_user_by_id(usuario_id):
+    return Usuario.query.get(usuario_id)
 
 def get_all_users():
     try:
