@@ -102,4 +102,37 @@ GET:
 - Obtener todos los usuarios: http://127.0.0.1:5000/auth/getUsers
   -body: no tiene body
   
+unidad didactica
+POST
+  - Agregar unidad: http://127.0.0.1:5000/unidades/addUnidad
+   - body:{
+    "programa": "administracion",
+    "tipo_plan": "modular",
+    "plan_estudios": 2017,
+    "modalidad": "presencial",
+    "enfoque": "presencial",
+    "seccion": "A",
+
+    "periodo_academico": "VI",
+    "profesor_principal":"juanito alimana",
+    "profesor_secundario":"pedro navaja",
+
+      
+}
+
+  
+GET
+ - Obtener profesor:http://127.0.0.1:5000/unidades/getUnidad/1 
+ - Obtener profesores: http://127.0.0.1:5000/unidades/getUnidades
+PUT
+  - Actualizar profesor: http://127.0.0.1:5000/unidades/updateUnidad/1
+DELETE
+  - Eliminar profesor: http://127.0.0.1:5000/unidades/deleteUnidad/1
+  
+  
+  
+  
+  
+  
+  
   
