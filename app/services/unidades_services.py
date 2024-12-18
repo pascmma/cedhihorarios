@@ -20,9 +20,12 @@ def add_unidad_service(data):
         seccion = data.get('enfoque'),
         periodo_academico =data.get('periodo_academico'),
         profesor_principal = data.get('profesor_principal'),
-        profesor_secundario = data.get('profesor_secundario')
+        profesor_apoyo = data.get('profesor_apoyo')
 
     )
+    db.session.add(new_unidad)
+    db.session.commit()
+    return new_unidad
 
 def update_unidad_service(unidad_id,data):
     unidad = UnidadDidactica.query.get(unidad_id)
