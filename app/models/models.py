@@ -33,7 +33,6 @@ class Profesor(db.Model):
     especialidad = db.Column(db.ARRAY(db.String),nullable=False)
     genero = db.Column(db.String, nullable=False)
     jornada = db.Column(db.String, nullable=False)
-    horasSemanales = db.Column(db.Integer, nullable=False)
     prioridad = db.Column(db.Integer, nullable=False)
     disponibilidad = db.Column(JSON, nullable=False)
 
@@ -49,7 +48,6 @@ class Profesor(db.Model):
             "especialidad": self.especialidad,
             "genero": self.genero,
             "jornada": self.jornada,
-            "horasSemanales": self.horasSemanales,
             "prioridad": self.prioridad,
             "disponibilidad": self.disponibilidad,
         }
@@ -108,17 +106,26 @@ class Aula(db.Model):
             "local":self.local,
             "formato_aula":self.formato_aula,
             "capacidad":self.capacidad
-            
+
             }
 
     
+class UnidadDidactica(db.Model):
+    __tablename__ = 'unidades_didacticas'
 
-
+    unidad_id = db.Column(db.Integer, primary_key=True)
+    programa = db.Column(db.String, nullable=False) # curso
+    tipo_plan = db.Column(db.String, nullable=False) 
+    plan_estudios = db.Column(db.Integer, nullable=False)
+    modalidad = db.Column(db.String, nullable=False)
+    enfoque = db.Column(db.String, nullable=False)
+    seccion = db.Column(db.String, nullable=False)
+    periodo_academico = db.Column(db.String, nullable=False)
+    profesor_principal = db.Column(db.String,nullable=False) # profesor
+    profesor_apoyo = db.Column(db.String, nullable=False) #profesor
 
 """
 class Horario(db.Model):
     pass
 
-class Aula(db.Model):
-    pass
     """

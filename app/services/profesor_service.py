@@ -18,7 +18,6 @@ def create_profesor(data):
         especialidad=data.get('especialidad'),
         genero=data.get('genero'),
         jornada=data.get('jornada'),
-        horasSemanales=data.get('horasSemanales'),
         prioridad=data.get('prioridad'),
         disponibilidad=data.get('disponibilidad')
     )
