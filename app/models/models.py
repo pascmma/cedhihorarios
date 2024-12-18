@@ -122,6 +122,24 @@ class UnidadDidactica(db.Model):
     profesor_principal = db.Column(db.String,nullable=False) # profesor
     profesor_apoyo = db.Column(db.String, nullable=False) #profesor
 
+    def to_dict(self):
+        return{
+            "unidad_id":self.unidad_id,
+            "programa":self.programa,
+            "tipo_plan":self.tipo_plan,
+            "plan_estudios":self.plan_estudios,
+            "modalidad":self.modalidad,
+            "enfoque":self.enfoque,
+            "seccion":self.seccion,
+            "periodo_academico":self.periodo_academico,
+            "profesor_principal":self.profesor_principal,
+            "profesor_apoyo":self.profesor_apoyo
+        }   
+
+
+
+
+
 """
 class Horario(db.Model):
     pass
