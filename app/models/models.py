@@ -64,7 +64,7 @@ class Curso(db.Model):
 
     curso_id = db.Column(db.Integer, primary_key=True) # id del curso 
     nombre = db.Column(db.String, nullable= False) # nombre del curso 
-    plan_estudios = db.Column(db.String, nullable=False) # plan de estudios al que pertenece
+    plan_estudios = db.Column(db.Integer, nullable=False) # plan de estudios al que pertenece
     modalidad = db.Column(db.String, nullable=False)
     semestre = db.Column(db.Integer, nullable=False)
     carrera  = db.Column(db.String, nullable=False)
