@@ -1,14 +1,15 @@
 from flask import Blueprint, request, jsonify
-from app.services.unidades_services import(get_all_unidades,get_unidad_service,add_unidad_service,update_unidad_service,delete_unidad_service)
+from app.services.unidades_services import(get_all_unidades,get_unidad_service,add_unidad_service,update_unidad_service,delete_unidad_service,prueba,add_unidad_service_2,get_all_unidades_2)
+
 
 unidad_blueprint = Blueprint('unidad',__name__)
 
 @unidad_blueprint.route('/getUnidades',methods=['GET'])
 def get_unidades():
     print("Inicio de get unidades")
-    unidades = get_all_unidades()
+    unidades = get_all_unidades_2()
     response = {
-        "unidades":[unidad.to_dict() for unidad in unidades]
+        "unidades":[unidad for unidad in unidades]
     }
     return jsonify(response),200
 
@@ -23,7 +24,7 @@ def get_unidad(unidad_id):
 @unidad_blueprint.route('/addUnidad',methods=['POST'])
 def add_unidad():
     data =request.json
-    new_unidad = add_unidad_service(data)
+    new_unidad = add_unidad_service_2(data)
     response = {
         "message":"Unidad didactica agregado exitosamente",
         "unidad":new_unidad.to_dict()
@@ -46,3 +47,10 @@ def delete_unidad(unidad_id):
         return jsonify({"error":"Unidad didactica no encotradad"}),404
     return jsonify({"message":"Unidad didactica eleminada correctamente"}),201
 
+@unidad_blueprint.route('/test',methods=['POST'])
+def test():
+    data = request.get_json()
+    curso = prueba(data)
+
+    print(curso)
+    return jsonify({"mesa":"exito","curso":curso[0]})

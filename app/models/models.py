@@ -82,6 +82,7 @@ class Curso(db.Model):
             "estado":self.estado,
             "tipo_curso":self.tipo_curso
         }
+    unidades_didacticas = db.relationship('UnidadDidactica',back_populates='curso')
 
 
 
@@ -112,8 +113,8 @@ class UnidadDidactica(db.Model):
     __tablename__ = 'unidades_didacticas'
 
     unidad_id = db.Column(db.Integer, primary_key=True)
-    programa = db.Column(db.String, nullable=False) # curso
-    tipo_plan = db.Column(db.String, nullable=False) 
+    programa = db.Column(db.String, nullable=False)  # Curso asociado
+    tipo_plan = db.Column(db.String, nullable=False)
     plan_estudios = db.Column(db.Integer, nullable=False)
     modalidad = db.Column(db.String, nullable=False)
     enfoque = db.Column(db.String, nullable=False)
@@ -121,9 +122,9 @@ class UnidadDidactica(db.Model):
     unidad_didactica = db.Column(db.String, nullable=False)
     periodo_academico = db.Column(db.String, nullable=False)
     seccion = db.Column(db.String, nullable=False)
+    curso_id = db.Column(db.Integer, db.ForeignKey('cursos.curso_id'), nullable=False)  # Relación con Curso
     profesor_principal = db.Column(db.String,nullable=False) 
     profesor_apoyo = db.Column(db.String, nullable=False) 
-    creditos = db.Column(db.Integer, nullable=False)
 
     def to_dict(self):
         return{
@@ -139,9 +140,12 @@ class UnidadDidactica(db.Model):
             "profesor_apoyo":self.profesor_apoyo,
             "unidad_didactica":self.unidad_didactica,
             "periodo_academico":self.periodo_academico,
-            "creditos":self.creditos
+            
+            
         }   
 
+    curso = db.relationship('Curso', back_populates='unidades_didacticas')
+    
 
 
 
