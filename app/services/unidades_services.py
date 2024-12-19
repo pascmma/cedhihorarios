@@ -18,9 +18,12 @@ def add_unidad_service(data):
         modalidad =data.get('modalidad'),
         enfoque =data.get('enfoque'),
         seccion = data.get('enfoque'),
-        periodo_academico =data.get('periodo_academico'),
+        semestre =data.get('semestre'),
         profesor_principal = data.get('profesor_principal'),
-        profesor_apoyo = data.get('profesor_apoyo')
+        profesor_apoyo = data.get('profesor_apoyo'),
+        unidad_didactica = data.get('unidad_didactica'),
+        periodo_academico =data.get('periodo_academico'),
+        creditos = data.get('creditos')
 
     )
     db.session.add(new_unidad)
@@ -43,4 +46,4 @@ def delete_unidad_service(unidad_id):
         return False
     db.session.delete(unidad)
     db.session.commit()
-    return True
+    return True 

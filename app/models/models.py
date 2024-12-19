@@ -117,10 +117,13 @@ class UnidadDidactica(db.Model):
     plan_estudios = db.Column(db.Integer, nullable=False)
     modalidad = db.Column(db.String, nullable=False)
     enfoque = db.Column(db.String, nullable=False)
-    seccion = db.Column(db.String, nullable=False)
+    semestre = db.Column(db.Integer, nullable=False)
+    unidad_didactica = db.Column(db.String, nullable=False)
     periodo_academico = db.Column(db.String, nullable=False)
-    profesor_principal = db.Column(db.String,nullable=False) # profesor
-    profesor_apoyo = db.Column(db.String, nullable=False) #profesor
+    seccion = db.Column(db.String, nullable=False)
+    profesor_principal = db.Column(db.String,nullable=False) 
+    profesor_apoyo = db.Column(db.String, nullable=False) 
+    creditos = db.Column(db.Integer, nullable=False)
 
     def to_dict(self):
         return{
@@ -131,10 +134,14 @@ class UnidadDidactica(db.Model):
             "modalidad":self.modalidad,
             "enfoque":self.enfoque,
             "seccion":self.seccion,
-            "periodo_academico":self.periodo_academico,
+            "semestre":self.semestre,
             "profesor_principal":self.profesor_principal,
-            "profesor_apoyo":self.profesor_apoyo
+            "profesor_apoyo":self.profesor_apoyo,
+            "unidad_didactica":self.unidad_didactica,
+            "periodo_academico":self.periodo_academico,
+            "creditos":self.creditos
         }   
+
 
 
 
