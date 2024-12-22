@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify
 from app.services.unidades_services import(get_all_unidades,get_unidad_service,add_unidad_service,update_unidad_service,delete_unidad_service,prueba,add_unidad_service_2,get_all_unidades_2)
+from app.services.session_service import (generar_horario_base)
 
 
 unidad_blueprint = Blueprint('unidad',__name__)
@@ -47,10 +48,9 @@ def delete_unidad(unidad_id):
         return jsonify({"error":"Unidad didactica no encotradad"}),404
     return jsonify({"message":"Unidad didactica eleminada correctamente"}),201
 
-@unidad_blueprint.route('/test',methods=['POST'])
+@unidad_blueprint.route('/test',methods=['GET'])
 def test():
-    data = request.get_json()
-    curso = prueba(data)
+    horario = generar_horario_base()
 
-    print(curso)
-    return jsonify({"mesa":"exito","curso":curso[0]})
+    print("el horario base")
+    return jsonify({"horario":horario})

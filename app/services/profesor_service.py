@@ -8,6 +8,7 @@ def get_profesor_by_id(profesor_id):
     return Profesor.query.get(profesor_id)
 
 def create_profesor(data):
+    print("Servicio de crear profesor")
     new_profesor = Profesor(
         nombres = data.get('nombres'),
         email=data.get('email'),

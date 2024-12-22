@@ -21,6 +21,7 @@ def get_profesor(profesor_id):
 
 @profesor_blueprint.route('/addProfesor', methods=['POST'])
 def add_profesor():
+    print("Ruta de crear profesores")
     data = request.json
     new_profesor = create_profesor(data)
     response = {

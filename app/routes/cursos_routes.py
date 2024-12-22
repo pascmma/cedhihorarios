@@ -22,6 +22,7 @@ def get_curso(curso_id):
 @cursos_blueprint.route('/addCurso',methods=['POST'])
 def add_curso():
     data = request.json
+    print("Se inicio el agregar del curso.")
     new_curso = create_curso(data)
     response = {
         "message":"Curso agregado exitosamente",

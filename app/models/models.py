@@ -21,7 +21,7 @@ class Usuario(db.Model):
         return bcrypt.check_password_hash(self.password_hash,password)
 
 class Profesor(db.Model):
-    __tablename__ = 'profesores'
+    __tablename__ = 'profesores2'
 
     profesor_id = db.Column(db.Integer, primary_key=True)
     nombres = db.Column(db.String,nullable=False)
@@ -60,7 +60,7 @@ class Profesor(db.Model):
 
 # curso es la Unidad didactica
 class Curso(db.Model):
-    __tablename__ = 'cursos'
+    __tablename__ = 'cursos2'
 
     curso_id = db.Column(db.Integer, primary_key=True) # id del curso 
     nombre = db.Column(db.String, nullable= False) # nombre del curso 
@@ -82,13 +82,13 @@ class Curso(db.Model):
             "estado":self.estado,
             "tipo_curso":self.tipo_curso
         }
-    unidades_didacticas = db.relationship('UnidadDidactica',back_populates='curso')
+    unidades_didacticas2 = db.relationship('UnidadDidactica',back_populates='curso')
 
 
 
 
 class Aula(db.Model):
-    __tablename__ = 'aulas'
+    __tablename__ = 'aulas2'
 
     aula_id = db.Column(db.Integer, primary_key=True)
     tipo_aula = db.Column(db.String, nullable=False)
@@ -110,7 +110,7 @@ class Aula(db.Model):
 
     
 class UnidadDidactica(db.Model):
-    __tablename__ = 'unidades_didacticas'
+    __tablename__ = 'unidades_didacticas2'
 
     unidad_id = db.Column(db.Integer, primary_key=True)
     programa = db.Column(db.String, nullable=False)  # Curso asociado
@@ -122,9 +122,10 @@ class UnidadDidactica(db.Model):
     unidad_didactica = db.Column(db.String, nullable=False)
     periodo_academico = db.Column(db.String, nullable=False)
     seccion = db.Column(db.String, nullable=False)
-    curso_id = db.Column(db.Integer, db.ForeignKey('cursos.curso_id'), nullable=False)  # Relación con Curso
+    curso_id = db.Column(db.Integer, db.ForeignKey('cursos2.curso_id'), nullable=False)  # Relación con Curso
     profesor_principal = db.Column(db.String,nullable=False) 
     profesor_apoyo = db.Column(db.String, nullable=False) 
+    horas_semanales = db.Column(db.Integer, nullable=False)
 
     def to_dict(self):
         return{
@@ -144,11 +145,8 @@ class UnidadDidactica(db.Model):
             
         }   
 
-    curso = db.relationship('Curso', back_populates='unidades_didacticas')
+    curso = db.relationship('Curso', back_populates='unidades_didacticas2')
     
-
-
-
 
 
 """
