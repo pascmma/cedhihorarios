@@ -39,7 +39,7 @@ def update_sesion_route(sesion_academica_id):
     if not updated:
         return jsonify ({"error":"Sesion no encontrada"}),404
     return jsonify(updated.to_dict()),201
-
+ 
 
 @sesion_academica_blueprint.route('/deleteSesion/<int:sesion_academica_id>', methods=['DELETE'])
 def delete_sesion_route(sesion_academica_id):
@@ -47,3 +47,7 @@ def delete_sesion_route(sesion_academica_id):
     if not deleted:
         return jsonify({"error":"Sesion academica no encontrada"}),404
     return jsonify({"message":"Sesion academica eliminada correctamente"}),201
+
+@sesion_academica_blueprint.route('/generarHorario', methods=['GET'])
+def generar_horario_route():
+    pass

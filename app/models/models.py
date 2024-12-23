@@ -82,7 +82,7 @@ class Curso(db.Model):
             "estado":self.estado,
             "tipo_curso":self.tipo_curso
         }
-    unidades_didacticas2 = db.relationship('UnidadDidactica',back_populates='curso')
+    unidades_didacticas = db.relationship('UnidadDidactica',back_populates='curso')
 
 
 

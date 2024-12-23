@@ -69,7 +69,9 @@ def add_unidad_service_2(data):
         profesor_apoyo = data.get('profesor_apoyo'),
         unidad_didactica = data.get('unidad_didactica'),
         periodo_academico =data.get('periodo_academico'),
-        curso_id = curso_ids
+        curso_id = curso_ids,
+        horas_semanales= data.get('horas_semanales')
+
         
 
     )

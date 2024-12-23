@@ -8,7 +8,7 @@ def get_profesores():
     print("INICIO DE GET PROFESORES")
     profesores = get_all_profesores()
     response = {
-        "profesores":[profesor.to_dict()for profesor in profesores]
+        "profesores":[profesor.to_dict() for profesor in profesores]
     }
     return jsonify(response),200
 
@@ -17,7 +17,7 @@ def get_profesor(profesor_id):
     profesor = get_profesor_by_id(profesor_id)
     if not profesor:
         return jsonify({"error":"Profesor no encontrado"}), 404
-    return jsonify(profesor.__dict__)
+    return jsonify(profesor.to_dict())
 
 @profesor_blueprint.route('/addProfesor', methods=['POST'])
 def add_profesor():
