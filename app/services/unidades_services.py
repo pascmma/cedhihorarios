@@ -17,7 +17,6 @@ def get_all_unidades_2():
         
         unidad_dict = unidad.to_dict()
         
-        
         if unidad.curso:
             curso_dict = unidad.curso.to_dict()
             unidad_dict.update(curso_dict)  
@@ -37,7 +36,7 @@ def add_unidad_service(data):
         plan_estudios = data.get('plan_estudios'),
         modalidad =data.get('modalidad'),
         enfoque =data.get('enfoque'),
-        seccion = data.get('enfoque'),
+        seccion = data.get('seccion'),
         semestre =data.get('semestre'),
         profesor_principal = data.get('profesor_principal'),
         profesor_apoyo = data.get('profesor_apoyo'),
@@ -64,7 +63,7 @@ def add_unidad_service_2(data):
         plan_estudios = data.get('plan_estudios'),
         modalidad =data.get('modalidad'),
         enfoque =data.get('enfoque'),
-        seccion = data.get('enfoque'),
+        seccion = data.get('seccion'),
         semestre =data.get('semestre'),
         profesor_principal = data.get('profesor_principal'),
         profesor_apoyo = data.get('profesor_apoyo'),

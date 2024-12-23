@@ -1,9 +1,9 @@
 from flask import Blueprint, request, jsonify
 from app.services.unidades_services import(get_all_unidades,get_unidad_service,add_unidad_service,update_unidad_service,delete_unidad_service,prueba,add_unidad_service_2,get_all_unidades_2)
-from app.services.session_service import (generar_horario_base)
+from app.services.session_service import (generar_horario_base,asignar_horarios)
 
 
-unidad_blueprint = Blueprint('unidad',__name__)
+unidad_blueprint = Blueprint('unidades',__name__)
 
 @unidad_blueprint.route('/getUnidades',methods=['GET'])
 def get_unidades():
@@ -54,3 +54,10 @@ def test():
 
     print("el horario base")
     return jsonify({"horario":horario})
+
+
+@unidad_blueprint.route('/test2', methods=['GET'])
+def test2():
+    resultado = asignar_horarios()
+    return jsonify(resultado),200
+

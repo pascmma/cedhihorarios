@@ -1,5 +1,5 @@
 #from app.models import sessssion
-from app.models import UnidadDidactica, Curso,Profesor
+from app.models import UnidadDidactica, Curso,Profesor,Aula,SesionesAcademicas
 from app.extensions import db
 from datetime import datetime, timedelta
 from sqlalchemy.orm import joinedload
@@ -13,6 +13,11 @@ def dividir_horas_semanales(horas_semanales):
     - El resto se divide en sesiones de 2 horas.
     """
     sesiones = []
+
+    if horas_semanales == 1:
+        sesiones.append(1)
+        return sesiones
+
     if horas_semanales > 3 and horas_semanales % 2 != 0:
         sesiones.append(3)
         horas_semanales -= 3
@@ -51,21 +56,103 @@ def generar_horario_base():
     return horario_base
 
 def asignar_horarios():
-    pass
+    profesores = Profesor.query.order_by(Profesor.prioridad).all()
+    unidades = UnidadDidactica.query.all()
+    aulas = Aula.query.all()
+
+    horario_general = generar_horario_base()
+    conflictos = []
+
+    for unidad in unidades:
+        horas_restantes = unidad.horas_semanales
+        asignado = False
+
+        for profesor in profesores:
+            disponibilidad = profesor.disponibilidad
+
+            for dia, bloques in horario_general.items():
+                if horas_restantes <= 0:
+                    break
+
+                if dia in [d["dia"] for d in disponibilidad]:
+                    bloques_disponibles = [
+                        b for b in bloques
+                        if not b["ocupado"] and any(
+                            b["hora_inicio"] >= d["horaInicio"] and b["hora_fin"] <= d["horaFin"]
+                            for d in disponibilidad if d["dia"] == dia
+                        )
+                    ]
+
+                    for bloque in bloques_disponibles:
+                        if horas_restantes <= 0:
+                            break
+
+                        # Asignar aula disponible
+                        aula_disponible = next(
+                            (aula for aula in aulas if not any(
+                                b["ocupado"] and b["aula"] == aula.nombre
+                                for b in bloques
+                            )), None
+                        )
+
+                        if aula_disponible:
+                            bloque["ocupado"] = True
+                            bloque["unidad_didactica"] = unidad.unidad_didactica
+                            bloque["profesor"] = profesor.nombres
+                            bloque["aula"] = aula_disponible.nombre
+                            horas_restantes -= 0.75  # 45 minutos = 0.75 horas
+                            asignado = True
+
+        if not asignado:
+            conflictos.append({
+                "unidad_didactica": unidad.unidad_didactica,
+                "profesor_prioridad": profesor.prioridad
+            })
+
+    return {"horario_general": horario_general, "conflictos": conflictos}
 
 
-"""
-FILTRAR POR  LA PRIORIDAD DE LOS PROFESORS
-"""
 
-"""
-FILTRAR LAS HORAS SEMANALES DE LA UNIDAD DIDACTICA
-"""
+def get_sesiones():
+    return SesionesAcademicas.query.all()
 
-"""
-SEPARAR LAS HORAS DEPENDIENDO DE LAS HORAS QUE SE TENGAN EN LA SEMANA
-"""
+def get_sesion(sesion_academica_id):
+    return SesionesAcademicas.query.get(sesion_academica_id)
 
-"""
-SEPARAR EN DOS HORARIOS CON EL REFRIGERIO DE EN MEDIO
-"""
+def add_sesion(data):
+    new_sesion = SesionesAcademicas(
+        tipo_aula = data.get('tipo_aula'),
+        aula = data.get('aula'),
+        aforo = data.get('aforo'),
+        dia = data.get('dia'),
+        tipo_clase = data.get('tipo_clase'),
+        docente = data.get('docente'),
+        hora_inicio = data.get('hora_inicio'),
+        hora_final = data.get('hora_final'),
+        cruce = data.get('cruce')
+    )
+    db.session.add(new_sesion)
+    db.session.commit()
+    return new_sesion
+
+
+def update_sesion(sesion_academica_id,data):
+    sesion = SesionesAcademicas.query.get(sesion_academica_id)
+    if not sesion:
+        return None
+    for key, value in data.items():
+        setattr(sesion,key,value)
+
+    db.session.commit()
+    return sesion
+
+
+def delete_sesion(sesion_academica_id):
+    sesion = SesionesAcademicas.query.get(sesion_academica_id)
+    if not sesion:
+        return False
+    db.session.delete(sesion)
+    db.session.commit()
+    return True
+
+
