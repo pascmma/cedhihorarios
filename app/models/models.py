@@ -153,29 +153,34 @@ class SesionesAcademicas(db.Model):
 
     sesion_academica_id = db.Column(db.Integer, primary_key=True)
     tipo_aula = db.Column(db.String,nullable=True)
-    nombre_unidad = db.Column(db.String, nullable=True)
-    aula = db.Column(db.String,nullable=True)
-    aforo = db.Column(db.Integer,nullable=True)
-    dia = db.Column(db.String,nullable=True)
-    tipo_clase = db.Column(db.String,nullable=True)
-    docente = db.Column(db.String,nullable=True)
-    hora_inicio = db.Column(db.String,nullable=True)
-    hora_final = db.Column(db.String,nullable=True)
-    cruce = db.Column(db.String,nullable=True)
+    unidad_didactica = db.Column(db.String, nullable=True)
+    horario =  db.Column(JSON, nullable=False)
+    sede = db.Column(db.String,nullable=True)
+    tipo_curso = db.Column(db.String,nullable=True)
+    periodo_academico = db.Column(db.String, nullable=False)
+    seccion = db.Column(db.String, nullable=False)
+    semestre = db.Column(db.Integer, nullable=False)
+    programa = db.Column(db.String, nullable=False)
+    profesor_principal = db.Column(db.String,nullable=False) 
+    profesor_apoyo = db.Column(db.String, nullable=False) 
+    flag_cruce = db.Column(db.Boolean, nullable=False)
+
+
 
     def to_dict(self):
         return{
-            "sesion_academica_id":self.sesion_academica_id,
-            "tipo_aula":self.tipo_aula,
-            "nombre_unidad":self.nombre_unidad,
-            "aula":self.aula,
-            "aforo":self.aforo,
-            "dia":self.dia,
-            "tipo_clase":self.tipo_clase,
-            "docente":self.docente,
-            "hora_inicio":self.hora_inicio,
-            "hora_final":self.hora_final,
-            "cruce":self.cruce
+           "tipo_aula":self.tipo_aula,
+           "unidad_didactica":self.unidad_didactica,
+           "horario":self.horario,
+           "sede":self.sede,
+           "tipo_curso":self.tipo_curso,
+           "periodo_academico":self.periodo_academico,
+           "seccion":self.seccion,
+           "semestre":self.semestre,
+           "programa":self.programa,
+           "profesor_principal":self.profesor_principal,
+           "profesor_apoyo":self.profesor_apoyo,
+           "flag_cruce":self.flag_cruce,
         }
     
 

@@ -120,20 +120,38 @@ def get_sesion(sesion_academica_id):
     return SesionesAcademicas.query.get(sesion_academica_id)
 
 def add_sesion(data):
+    # Buscar la unidad didáctica por su nombre
+    unidad_didactica_nombre = data.get('unidad_didactica')
+    if not unidad_didactica_nombre:
+        return {"error": "El campo 'unidad_didactica' es obligatorio"}, 400
+
+    unidad = UnidadDidactica.query.filter_by(unidad_didactica=unidad_didactica_nombre).first()
+
+    if not unidad:
+        return {"error": f"No se encontró la Unidad Didáctica con el nombre '{unidad_didactica_nombre}'"}, 404
+
+    
     new_sesion = SesionesAcademicas(
-        tipo_aula = data.get('tipo_aula'),
-        aula = data.get('aula'),
-        aforo = data.get('aforo'),
-        dia = data.get('dia'),
-        tipo_clase = data.get('tipo_clase'),
-        docente = data.get('docente'),
-        hora_inicio = data.get('hora_inicio'),
-        hora_final = data.get('hora_final'),
-        cruce = data.get('cruce')
+        tipo_aula=data.get('tipo_aula',None),
+        unidad_didactica=unidad.unidad_didactica, 
+        horario=data.get('horario'),
+        sede=data.get('sede', None),
+        tipo_curso=data.get('tipo_curso', None),
+        periodo_academico=unidad.periodo_academico,  
+        seccion=unidad.seccion,  
+        semestre=unidad.semestre,  
+        programa=unidad.programa,  
+        profesor_principal=unidad.profesor_principal,
+        profesor_apoyo=unidad.profesor_apoyo,  
+        flag_cruce=data.get('flag_cruce', False) 
     )
+
+    
     db.session.add(new_sesion)
     db.session.commit()
+
     return new_sesion
+
 
 
 def update_sesion(sesion_academica_id,data):
