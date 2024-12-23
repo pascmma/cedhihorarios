@@ -122,7 +122,7 @@ class UnidadDidactica(db.Model):
     unidad_didactica = db.Column(db.String, nullable=False)
     periodo_academico = db.Column(db.String, nullable=False)
     seccion = db.Column(db.String, nullable=False)
-    curso_id = db.Column(db.Integer, db.ForeignKey('cursos2.curso_id'), nullable=False)  # Relación con Curso
+    curso_id = db.Column(db.Integer, db.ForeignKey('cursos.curso_id'), nullable=False)  # Relación con Curso
     profesor_principal = db.Column(db.String,nullable=False) 
     profesor_apoyo = db.Column(db.String, nullable=False) 
     horas_semanales = db.Column(db.Integer, nullable=False)
@@ -146,7 +146,7 @@ class UnidadDidactica(db.Model):
             
         }   
 
-    curso = db.relationship('Curso', back_populates='unidades_didacticas2')
+    curso = db.relationship('Curso', back_populates='unidades_didacticas')
     
 class SesionesAcademicas(db.Model):
     __tablename__ = 'sesiones_academicas'
