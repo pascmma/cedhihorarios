@@ -21,7 +21,7 @@ class Usuario(db.Model):
         return bcrypt.check_password_hash(self.password_hash,password)
 
 class Profesor(db.Model):
-    __tablename__ = 'profesores2'
+    __tablename__ = 'profesores'
 
     profesor_id = db.Column(db.Integer, primary_key=True)
     nombres = db.Column(db.String,nullable=False)
@@ -60,7 +60,7 @@ class Profesor(db.Model):
 
 # curso es la Unidad didactica
 class Curso(db.Model):
-    __tablename__ = 'cursos2'
+    __tablename__ = 'cursos'
 
     curso_id = db.Column(db.Integer, primary_key=True) # id del curso 
     nombre = db.Column(db.String, nullable= False) # nombre del curso 
@@ -88,7 +88,7 @@ class Curso(db.Model):
 
 
 class Aula(db.Model):
-    __tablename__ = 'aulas2'
+    __tablename__ = 'aulas'
 
     aula_id = db.Column(db.Integer, primary_key=True)
     tipo_aula = db.Column(db.String, nullable=False)
@@ -110,7 +110,7 @@ class Aula(db.Model):
 
     
 class UnidadDidactica(db.Model):
-    __tablename__ = 'unidades_didacticas2'
+    __tablename__ = 'unidades_didacticas'
 
     unidad_id = db.Column(db.Integer, primary_key=True)
     programa = db.Column(db.String, nullable=False)  # Curso asociado
@@ -149,7 +149,7 @@ class UnidadDidactica(db.Model):
     curso = db.relationship('Curso', back_populates='unidades_didacticas2')
     
 class SesionesAcademicas(db.Model):
-    __tablename__ = 'sesiones_academicas2'
+    __tablename__ = 'sesiones_academicas'
 
     sesion_academica_id = db.Column(db.Integer, primary_key=True)
     tipo_aula = db.Column(db.String,nullable=True)
