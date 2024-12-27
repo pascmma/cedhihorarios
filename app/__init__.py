@@ -7,6 +7,7 @@ from app.routes.cursos_routes import cursos_blueprint
 from app.routes.aula_routes import aulas_blueprint
 from app.routes.unidades_routes import unidad_blueprint
 from app.routes.sesiones_routes import sesion_academica_blueprint
+from app.routes.data_routes import excel_blueprint
 
 def create_app():
     app = Flask(__name__)
@@ -18,6 +19,7 @@ def create_app():
     app.register_blueprint(aulas_blueprint, url_prefix='/aulas')
     app.register_blueprint(unidad_blueprint, url_prefix='/unidades')
     app.register_blueprint(sesion_academica_blueprint, url_prefix='/sesiones')
+    app.register_blueprint(excel_blueprint, url_prefix='/excel')
     
     return app
 
