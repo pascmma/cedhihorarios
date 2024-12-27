@@ -61,3 +61,5 @@ def delete_all_sesions_route():
         return jsonify({"message":"Se eliminaron todas las sesiones"}),201
     else:
         return jsonify({"message":"No se pudo eliminar"}),500
+
+

@@ -1,5 +1,5 @@
 from flask import Blueprint,request, jsonify
-from app.services.cursos_service import (get_all_cursos,get_curso_by_id,create_curso,update_curso,delete_curso,update_availability)
+from app.services.cursos_service import (get_all_cursos,get_curso_by_id,create_curso,update_curso,delete_curso,update_availability,delete_cursos_array)
 
 cursos_blueprint = Blueprint('cursos',__name__)
 
@@ -59,3 +59,19 @@ def enable_curso(curso_id):
         return jsonify({"message":"Curso habilitado como Unidad Didactica"})
     except Exception as e:
         return jsonify({"error":str(e)}),500 
+    
+@cursos_blueprint.route('/deleteSelectedCursos', methods=['DELETE'])
+def delete_cursos_selected_route():
+    data = request.get_json()
+
+    if not data or not isinstance(data,list):
+        return jsonify({"error":"Se necesita un cuerpo con 'curso_id"}),404
+    
+    resultado = delete_cursos_array(data)
+
+    if "error" in resultado:
+        return jsonify({"error":resultado["error"]}),500
+    
+    return jsonify({
+        "message":"eliminacion completada",
+    }),200

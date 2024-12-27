@@ -60,4 +60,3 @@ def test():
 def test2():
     resultado = asignar_horarios()
     return jsonify(resultado),200
-

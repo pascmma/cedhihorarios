@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from app.services.profesor_service import (get_all_profesores,get_profesor_by_id,create_profesor,update_profesor,delete_profesor)
+from app.services.profesor_service import (get_all_profesores,get_profesor_by_id,create_profesor,update_profesor,delete_profesor,delete_profesores_array)
 
 profesor_blueprint = Blueprint('profesor',__name__)
 
@@ -45,3 +45,19 @@ def delete_profesor_data(profesor_id):
         return jsonify({"error":"Profesor no encontrado"}),404
     return jsonify({"message":"Profesor eliminado correctamente"})
   
+
+@profesor_blueprint.route('/deleteSelectedProfesores', methods=['DELETE'])
+def delete_cursos_selected_route():
+    data = request.get_json()
+
+    if not data or not isinstance(data,list):
+        return jsonify({"error":"Se necesita un cuerpo con 'profesor_id"}),404
+    
+    resultado = delete_profesores_array(data)
+
+    if "error" in resultado:
+        return jsonify({"error":resultado["error"]}),500
+    
+    return jsonify({
+        "message":"eliminacion completada",
+    }),200
