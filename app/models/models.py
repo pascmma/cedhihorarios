@@ -81,7 +81,8 @@ class Curso(db.Model):
             "carrera":self.carrera,
             "creditos":self.creditos,
             "estado":self.estado,
-            "tipo_curso":self.tipo_curso
+            "tipo_curso":self.tipo_curso,
+            "estado-curso": self.estado_curso
         }
     unidades_didacticas = db.relationship('UnidadDidactica',back_populates='curso')
 
