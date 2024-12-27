@@ -174,3 +174,7 @@ def delete_sesion(sesion_academica_id):
     return True
 
 
+def delete_all_sesions():
+    db.session.query(SesionesAcademicas).delete()
+    db.session.commit()
+    return True
