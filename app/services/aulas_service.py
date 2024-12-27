@@ -35,3 +35,16 @@ def delete_aula_service(aula_id):
     db.session.commit()
     return True
     
+
+def delete_aulas_array(aulas):
+    aulas_ids = [aula['aula_id'] for aula in aulas]
+
+    aulas_to_delete = Aula.query.filter(Aula.aula_id.in_(aulas_ids)).all()
+
+    for aula in aulas_to_delete:
+        db.session.delete(aula)
+    db.session.commit()
+
+    return{
+        "message":"Se eliminaron las aulas."
+    }
