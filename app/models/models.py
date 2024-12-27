@@ -70,7 +70,7 @@ class Curso(db.Model):
     creditos = db.Column(db.Integer, nullable=False)
     estado = db.Column(db.Boolean,nullable=False) # ver si es una unidad didactica
     tipo_curso = db.Column(db.String, nullable=False)
-    estado_curso = db.Column(db.String) # si un curso es de formacion o carrera
+    estado_curso = db.Column(db.String, nullable=False) # si un curso es de formacion o carrera
 
     def to_dict(self):
         return{

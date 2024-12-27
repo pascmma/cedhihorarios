@@ -15,7 +15,8 @@ def create_curso(data):
         semestre = data.get('semestre'),    
         creditos = data.get('creditos'),
         tipo_curso = data.get('tipo_curso'),
-        estado = False
+        estado = False,
+        estado_curso = data.get('estado_curso')
     )
     db.session.add(new_curso)
     db.session.commit()
