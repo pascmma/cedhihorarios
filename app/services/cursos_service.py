@@ -55,12 +55,12 @@ def update_availability(curso_id):
 def delete_cursos_array(cursos):
     cursos_ids = [curso['curso_id'] for curso in cursos]
 
-    cursos_to_delete = Curso.query.filter(Curso.curso_id.in_(cursos_ids).all())
+    cursos_to_delete = Curso.query.filter(Curso.curso_id.in_(cursos_ids)).all()
 
     for curso in cursos_to_delete:
         db.session.delete(curso)
     db.session.commit()
 
     return{
-        "message":"Se eliminaron los cursos"
+        "message":"Se eliminaron los cursos."
     }

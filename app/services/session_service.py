@@ -178,3 +178,17 @@ def delete_all_sesions():
     db.session.query(SesionesAcademicas).delete()
     db.session.commit()
     return True
+
+
+def delete_sesiones_array(sesiones):
+    sesiones_ids = [sesion['sesion_academica_id'] for sesion in sesiones]
+
+    sesiones_to_delete = SesionesAcademicas.query.filter(SesionesAcademicas.sesion_academica_id.in_(sesiones_ids)).all()
+
+    for sesion in sesiones_to_delete:
+        db.session.delete(sesion)
+    db.session.commit()
+
+    return{
+        "message":"Se eliminaron las sesiones."
+    }

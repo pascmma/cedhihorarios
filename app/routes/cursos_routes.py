@@ -73,5 +73,6 @@ def delete_cursos_selected_route():
         return jsonify({"error":resultado["error"]}),500
     
     return jsonify({
-        "message":"eliminacion completada",
+        "message":resultado["message"]
     }),200
+

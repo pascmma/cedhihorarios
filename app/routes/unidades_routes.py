@@ -61,9 +61,8 @@ def test2():
     resultado = asignar_horarios()
     return jsonify(resultado),200
 
-
 @unidad_blueprint.route('/deleteSelectedUnidades', methods=['DELETE'])
-def delete_cursos_selected_route():
+def delete_unidades_selected_route():
     data = request.get_json()
 
     if not data or not isinstance(data,list):
@@ -75,5 +74,6 @@ def delete_cursos_selected_route():
         return jsonify({"error":resultado["error"]}),500
     
     return jsonify({
-        "message":"eliminacion completada",
+        "message":resultado["message"]
     }),200
+

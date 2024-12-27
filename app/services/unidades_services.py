@@ -108,7 +108,7 @@ def prueba(data):
 def delete_unidades_array(unidades):
     unidades_ids = [unidad['unidad_id'] for unidad in unidades]
 
-    unidades_to_delete = UnidadDidactica.query.filter(UnidadDidactica.unidad_id.in_(unidades_ids).all())
+    unidades_to_delete = UnidadDidactica.query.filter(UnidadDidactica.unidad_id.in_(unidades_ids)).all()
 
     for unidad in unidades_to_delete:
         db.session.delete(unidad)

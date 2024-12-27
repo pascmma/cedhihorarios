@@ -1,5 +1,5 @@
 from flask import Blueprint, request,jsonify
-from app.services.session_service import (add_sesion,get_sesion,get_sesiones,update_sesion,delete_sesion,generar_horario_base,asignar_horarios,delete_all_sesions)
+from app.services.session_service import (add_sesion,get_sesion,get_sesiones,update_sesion,delete_sesion,generar_horario_base,asignar_horarios,delete_all_sesions,delete_sesiones_array)
 
 
 sesion_academica_blueprint = Blueprint('sesiones',__name__)
@@ -62,4 +62,21 @@ def delete_all_sesions_route():
     else:
         return jsonify({"message":"No se pudo eliminar"}),500
 
+
+
+@sesion_academica_blueprint.route('/deleteSelectedSesiones', methods=['DELETE'])
+def delete_cursos_selected_route():
+    data = request.get_json()
+
+    if not data or not isinstance(data,list):
+        return jsonify({"error":"Se necesita un cuerpo con id"}),404
+    
+    resultado = delete_sesiones_array(data)
+
+    if "error" in resultado:
+        return jsonify({"error":resultado["error"]}),500
+    
+    return jsonify({
+        "message":resultado["message"]
+    }),200
 
