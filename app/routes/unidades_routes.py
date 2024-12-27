@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from app.services.unidades_services import(get_all_unidades,get_unidad_service,add_unidad_service,update_unidad_service,delete_unidad_service,prueba,add_unidad_service_2,get_all_unidades_2)
+from app.services.unidades_services import(get_all_unidades,get_unidad_service,add_unidad_service,update_unidad_service,delete_unidad_service,prueba,add_unidad_service_2,get_all_unidades_2, delete_unidades_array)
 from app.services.session_service import (generar_horario_base,asignar_horarios)
 
 
@@ -60,3 +60,20 @@ def test():
 def test2():
     resultado = asignar_horarios()
     return jsonify(resultado),200
+
+
+@unidad_blueprint.route('/deleteSelectedUnidades', methods=['DELETE'])
+def delete_cursos_selected_route():
+    data = request.get_json()
+
+    if not data or not isinstance(data,list):
+        return jsonify({"error":"Se necesita un cuerpo con id"}),404
+    
+    resultado = delete_unidades_array(data)
+
+    if "error" in resultado:
+        return jsonify({"error":resultado["error"]}),500
+    
+    return jsonify({
+        "message":"eliminacion completada",
+    }),200
