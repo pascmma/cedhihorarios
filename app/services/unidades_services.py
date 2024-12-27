@@ -104,3 +104,16 @@ def prueba(data):
     curso = Curso.query.with_entities(Curso.creditos).filter_by(nombre=nombre).first()
     return curso
 
+
+def delete_unidades_array(unidades):
+    unidades_ids = [unidad['unidad_id'] for unidad in unidades]
+
+    profesores_to_delete = UnidadDidactica.query.filter(UnidadDidactica.unidad_id.in_(profesores_ids).all())
+
+    for profesor in profesores_to_delete:
+        db.session.delete(profesor)
+    db.session.commit()
+
+    return{
+        "message":"Se eliminaron las unidades."
+    }

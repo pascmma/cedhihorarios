@@ -62,5 +62,5 @@ def delete_cursos_array(cursos):
     db.session.commit()
 
     return{
-        "message":"Se eliminaro los cursos"
+        "message":"Se eliminaron los cursos"
     }

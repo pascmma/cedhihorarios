@@ -50,7 +50,7 @@ def delete_profesor(profesor_id):
 def delete_profesores_array(profesores):
     profesores_ids = [profesor['profesor_id'] for profesor in profesores]
 
-    profesores_to_delete = Profesor.query.filter(Profesor.profesor_id_id.in_(profesores_ids).all())
+    profesores_to_delete = Profesor.query.filter(Profesor.profesor_id.in_(profesores_ids).all())
 
     for profesor in profesores_to_delete:
         db.session.delete(profesor)
