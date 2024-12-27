@@ -9,7 +9,7 @@ def get_sesiones_route():
     print("Inicio de get sesiones")
     sesiones = get_sesiones()
     response = {
-        "sesiones":[sesion for sesion in sesiones]
+        "sesiones":[sesion.to_dict() for sesion in sesiones]
     }
     return jsonify(response),200
 

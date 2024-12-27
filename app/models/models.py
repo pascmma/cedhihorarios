@@ -170,6 +170,7 @@ class SesionesAcademicas(db.Model):
 
     def to_dict(self):
         return{
+           "sesion_academica_id":self.sesion_academica_id,
            "tipo_aula":self.tipo_aula,
            "unidad_didactica":self.unidad_didactica,
            "horario":self.horario,
