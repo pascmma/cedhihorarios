@@ -14,7 +14,6 @@ def create_profesor(data):
         email=data.get('email'),
         edad=data.get('edad'),
         contacto=data.get('contacto'),
-        ciudad=data.get('ciudad'),
         status=data.get('status'),
         especialidad=data.get('especialidad'),
         genero=data.get('genero'),

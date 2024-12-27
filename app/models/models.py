@@ -28,7 +28,6 @@ class Profesor(db.Model):
     email = db.Column(db.String, nullable=False)
     contacto = db.Column(db.Integer, nullable=False)
     edad = db.Column(db.Integer, nullable=False)
-    ciudad = db.Column(db.String, nullable=False)
     status = db.Column(db.String, nullable=False)
     especialidad = db.Column(db.ARRAY(db.String),nullable=False)
     genero = db.Column(db.String, nullable=False)
@@ -43,7 +42,6 @@ class Profesor(db.Model):
             "email": self.email,
             "contacto": self.contacto,
             "edad": self.edad,
-            "ciudad": self.ciudad,
             "status": self.status,
             "especialidad": self.especialidad,
             "genero": self.genero,
